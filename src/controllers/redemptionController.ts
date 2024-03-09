@@ -6,7 +6,7 @@ import { Redemption, Staff } from "src/types";
 const REDEMPTIONS_FILE = "data/redemptions.csv";
 
 export function deserializeRedemptions(): Redemption[] {
-  console.log("\n----- DESERIALIZING REDEMPTIONS -----");
+  console.log("\n> Deserializing redemptions... ");
   let records: Redemption[] = [];
   try {
     const data = fs.readFileSync(
@@ -36,7 +36,7 @@ export function deserializeRedemptions(): Redemption[] {
 }
 
 export function serializeRedemptions(records: Redemption[]): void {
-  console.log("\n----- SERIALIZING REDEMPTIONS -----");
+  console.log("\n> Serializing Redemptions...");
   const data = stringify(records, {
     header: true,
   });
@@ -52,7 +52,6 @@ export function isEligible(team_name: string): boolean {
 
 export function redeem(staff: Staff): boolean {
   if (!isEligible(staff.team_name)) {
-    console.error("Team is not eligible for redemption");
     return false;
   }
 

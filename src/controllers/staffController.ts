@@ -6,7 +6,7 @@ import { Staff } from "src/types";
 const STAFF_ID_TO_TEAM_MAPPING_FILE = "data/staff-id-to-team-mapping-long.csv";
 
 export function deserializeStaffs(): Staff[] {
-  console.log("\n----- DESERIALIZING STAFFS -----");
+  console.log("\n> Deserializing staffs...");
   let records: Staff[] = [];
   try {
     const data = fs.readFileSync(
