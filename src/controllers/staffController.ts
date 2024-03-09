@@ -1,10 +1,12 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import { parse } from "csv/sync";
 import { Staff } from "src/types";
 
-const STAFF_ID_TO_TEAM_MAPPING_FILE = "data/staff-id-to-team-mapping-long.csv";
-
+const STAFF_ID_TO_TEAM_MAPPING_FILE =
+  process.env.NODE_ENV === "test"
+    ? path.resolve(__dirname, "../../test/data/staff-id-to-team-mapping.csv")
+    : path.resolve(__dirname, "../data/staff-id-to-team-mapping-long.csv");
 /**
  * Deserialize staffs data from a CSV file.
  * @returns An array of Staff objects.
@@ -44,5 +46,9 @@ export function getStaff(staff_pass_id: string): Staff | undefined {
   return staffRecords.find((record) => record.staff_pass_id === staff_pass_id);
 }
 
+export function initializeStaffs(): void {
+  staffRecords = deserializeStaffs();
+}
+
 // Initialize staff records
-export const staffRecords: Staff[] = deserializeStaffs();
+export let staffRecords: Staff[] = deserializeStaffs();

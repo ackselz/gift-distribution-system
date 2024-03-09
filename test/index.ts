@@ -1,8 +1,12 @@
-import { describe, it } from "node:test";
-import assert from "node:assert/strict";
+import { tap } from "node:test/reporters";
+import { run } from "node:test";
+import process from "node:process";
 
-describe("dummy test", () => {
-  it("works", () => {
-    assert.equal(true, true);
-  });
-});
+run({
+  files: [
+    "./test/controllers/staffController.test.ts",
+    "./test/controllers/staffController.test.ts",
+  ],
+})
+  .compose(tap)
+  .pipe(process.stdout);

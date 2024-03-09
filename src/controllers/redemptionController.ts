@@ -1,9 +1,12 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
 import { parse, stringify } from "csv/sync";
 import { Redemption, Staff } from "src/types";
+import path from "path";
 
-const REDEMPTIONS_FILE = "data/redemptions.csv";
+export const REDEMPTIONS_FILE_PATH =
+  process.env.NODE_ENV === "test"
+    ? path.resolve(__dirname, "../../test/data/redemptions.csv")
+    : path.resolve(__dirname, "../data/redemptions.csv");
 
 /**
  * Deserializes redemptions data from a CSV file.
@@ -13,10 +16,7 @@ export function deserializeRedemptions(): Redemption[] {
   console.log("\n> Deserializing redemptions... ");
   let records: Redemption[] = [];
   try {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, REDEMPTIONS_FILE),
-      "utf8",
-    );
+    const data = fs.readFileSync(REDEMPTIONS_FILE_PATH, "utf8");
     records = parse(data, {
       bom: true,
       cast: (value, context) => {
@@ -49,7 +49,7 @@ export function serializeRedemptions(records: Redemption[]): void {
     const data = stringify(records, {
       header: true,
     });
-    fs.writeFileSync(path.resolve(__dirname, REDEMPTIONS_FILE), data, {
+    fs.writeFileSync(REDEMPTIONS_FILE_PATH, data, {
       flag: "w", // overwrite the file
     });
   } catch (error) {
@@ -92,5 +92,9 @@ export function redeem(staff: Staff): boolean {
   }
 }
 
+export function initializeRedemptions(): void {
+  redemptionRecords = deserializeRedemptions();
+}
+
 // Initialize redemption records
-export const redemptionRecords: Redemption[] = deserializeRedemptions();
+export let redemptionRecords: Redemption[] = deserializeRedemptions();
