@@ -11,7 +11,7 @@
     "clean": "rimraf dist",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "dev": "nodemon --watch src --watch test --ext ts,json --exec 'pnpm bundle && pnpm start'",
+    "dev": "NODE_ENV=dev nodemon --watch src --watch test --ext ts,json --exec 'pnpm bundle && pnpm start'",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
     "lint": "eslint . --fix",

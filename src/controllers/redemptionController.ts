@@ -4,9 +4,11 @@ import { Redemption, Staff } from "src/types";
 import path from "path";
 
 export const REDEMPTIONS_FILE_PATH =
-  process.env.NODE_ENV === "test"
-    ? path.resolve(__dirname, "../../test/data/redemptions.csv")
-    : path.resolve(__dirname, "../data/redemptions.csv");
+  process.env.NODE_ENV === "dev"
+    ? path.resolve(__dirname, "../src/data/redemptions.csv")
+    : process.env.NODE_ENV === "test"
+      ? path.resolve(__dirname, "../../test/data/redemptions.csv")
+      : path.resolve(__dirname, "../data/redemptions.csv");
 
 /**
  * Deserializes redemptions data from a CSV file.
