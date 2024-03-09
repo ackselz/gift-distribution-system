@@ -1,6 +1,6 @@
 import express from "express";
 import * as bodyParser from "body-parser";
-import router from "./routes";
+import apiRouter from "./routes/api";
 
 const PORT = 3000;
 
@@ -25,4 +25,4 @@ app.listen(PORT, () => {
   console.log(`\n> Listening on port ${PORT}`);
 });
 
-app.use("/api", router);
+app.use("/api", apiRouter);

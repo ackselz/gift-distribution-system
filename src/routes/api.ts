@@ -1,16 +1,16 @@
 import { Router } from "express";
-import { getStaff } from "./controllers/staffController";
-import { redeem } from "./controllers/redemptionController";
+import { getStaff } from "../controllers/staffController";
+import { redeem } from "../controllers/redemptionController";
 
-const router: Router = Router();
+const apiRouter: Router = Router();
 
-// GET /ping
-router.get("/ping", async (_req, res) => {
+// GET /api/ping
+apiRouter.get("/ping", async (_req, res) => {
   res.status(200).send("pong");
 });
 
-// GET /staffs/:staff_pass_id
-router.get("/staffs/:staff_pass_id", async (req, res) => {
+// GET /api/staffs/:staff_pass_id
+apiRouter.get("/staffs/:staff_pass_id", async (req, res) => {
   try {
     const { staff_pass_id } = req.params;
     if (staff_pass_id === undefined) {
@@ -27,8 +27,8 @@ router.get("/staffs/:staff_pass_id", async (req, res) => {
   }
 });
 
-// POST /redeem
-router.post("/redeem", async (req, res) => {
+// POST /api/redeem
+apiRouter.post("/redeem", async (req, res) => {
   try {
     const { staff_pass_id } = req.body;
     if (staff_pass_id === undefined) {
@@ -51,4 +51,4 @@ router.post("/redeem", async (req, res) => {
   }
 });
 
-export default router;
+export default apiRouter;
