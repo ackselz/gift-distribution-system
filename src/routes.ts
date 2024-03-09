@@ -11,15 +11,20 @@ router.get("/ping", async (_req, res) => {
 
 // GET /staffs/:staff_pass_id
 router.get("/staffs/:staff_pass_id", async (req, res) => {
-  const { staff_pass_id } = req.params;
-  if (staff_pass_id === undefined) {
-    return res.status(400).json({ error: "staff_pass_id is required" });
+  try {
+    const { staff_pass_id } = req.params;
+    if (staff_pass_id === undefined) {
+      return res.status(400).json({ error: "staff_pass_id is required" });
+    }
+    const staff = getStaff(staff_pass_id);
+    if (!staff) {
+      return res.status(404).json({ error: "Staff not found" });
+    }
+    return res.status(200).json(staff);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
   }
-  const staff = getStaff(staff_pass_id);
-  if (!staff) {
-    return res.status(404).json({ error: "Staff not found" });
-  }
-  return res.status(200).json(staff);
 });
 
 // POST /redeem
