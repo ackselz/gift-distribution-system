@@ -6,13 +6,11 @@ const PORT = 3000;
 
 const app = express();
 
+// Middleware to parse request body in Express
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-  console.log(`\n> Listening on port ${PORT}`);
-});
-
+// Middleware to log requests and response status
 app.use((req, res, next) => {
   console.log(`\n> ${req.method} ${req.path}`);
   console.log("Headers:", req.headers);
@@ -21,6 +19,10 @@ app.use((req, res, next) => {
     console.log(`> ${res.statusCode} ${res.statusMessage}`);
   });
   next();
+});
+
+app.listen(PORT, () => {
+  console.log(`\n> Listening on port ${PORT}`);
 });
 
 app.use("/api", router);
