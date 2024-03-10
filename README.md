@@ -32,7 +32,7 @@ pnpm dev
 
 ### Views
 
-A simple redemption form is available at `localhost:3000`
+A simple redemption form is available at `localhost:3000`. An internet connection is required for this interface to function properly (loading styles and scripts via CDN).
 
 ### API Reference
 
