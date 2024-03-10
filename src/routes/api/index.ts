@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getStaff } from "../controllers/staffController";
-import { redeem } from "../controllers/redemptionController";
+import { getStaff } from "../../controllers/staffController";
+import { redeem } from "../../controllers/redemptionController";
 
 const apiRouter: Router = Router();
 
