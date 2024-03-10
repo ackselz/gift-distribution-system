@@ -4,7 +4,7 @@
 
 ### Prerequisites:
 
-- Node.js (version 20.11.0 or later)
+- Node.js (version 21.3.0 or later)
 - pnpm (version 8.15.4 or later)
 
 ### Installation
@@ -24,7 +24,7 @@
 
 ### Running the development server:
 
-The development server runs at `localhost:3000`
+The development server runs at `localhost:3000`. Please restart the server you make changes to the data files.
 
 ```bash
 pnpm dev
@@ -102,6 +102,8 @@ pnpm test
 ```
 
 ## Assumptions
+
+Some assumptions I have made about the task:
 
 - Each staff pass is a unique ID (given)
 - Staff who do not appear on the mapping file are not eligible for redemption
