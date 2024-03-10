@@ -4,11 +4,9 @@ import { parse } from "csv/sync";
 import { Staff } from "src/types";
 
 const STAFF_ID_TO_TEAM_MAPPING_FILE =
-  process.env.NODE_ENV === "dev"
-    ? path.resolve(__dirname, "../src/data/staff-id-to-team-mapping-long.csv")
-    : process.env.NODE_ENV === "test"
-      ? path.resolve(__dirname, "../../test/data/staff-id-to-team-mapping.csv")
-      : path.resolve(__dirname, "../data/staff-id-to-team-mapping-long.csv");
+  process.env.NODE_ENV === "test"
+    ? path.resolve(__dirname, "../../test/data/staff-id-to-team-mapping.csv")
+    : path.resolve(__dirname, "../data/staff-id-to-team-mapping-long.csv");
 /**
  * Deserialize staffs data from a CSV file.
  * @returns An array of Staff objects.

@@ -5,18 +5,15 @@
   "engines": {
     "node": ">=20.11.0"
   },
-  "typings": "dist/src/index.d.ts",
   "scripts": {
-    "bundle": "esbuild src/index.ts --outdir=bundle --sourcemap --bundle --platform=node --target=node20.10.0",
     "clean": "rimraf dist",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "dev": "NODE_ENV=dev nodemon --watch src --watch test --ext ts,json --exec 'pnpm bundle && pnpm start'",
+    "dev": "NODE_ENV=dev tsx src/index.ts",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
     "lint": "eslint . --fix",
     "lint-check": "eslint .",
-    "start": "node --enable-source-maps ./bundle/index.js",
     "test": "NODE_ENV=test glob \"src/**/*.test.ts\" \"test/**/*.test.ts\" -c \"tsx --test\""
   },
   "devDependencies": {
@@ -27,7 +24,6 @@
     "@types/nodemon": "1.19.6",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
-    "esbuild": "0.19.12",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "glob": "10.3.10",
