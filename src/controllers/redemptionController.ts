@@ -65,7 +65,6 @@ export function serializeRedemptions(records: Redemption[]): void {
  * @returns A boolean value indicating if the team is eligible for redemption.
  */
 export function isEligible(team_name: string): boolean {
-  console.log(team_name, redemptionRecords);
   return !redemptionRecords.find((record) => record.team_name === team_name);
 }
 

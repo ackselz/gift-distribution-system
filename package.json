@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/src/index.js",
   "engines": {
-    "node": ">=20.11.0"
+    "node": ">=21.3.0"
   },
   "scripts": {
     "clean": "rimraf dist",
