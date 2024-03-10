@@ -43,24 +43,24 @@ A simple redemption form is available at `localhost:3000`
 
 ##### Parameters
 
-> | name            | type     | data type | description                |
-> | --------------- | -------- | --------- | -------------------------- |
-> | `staff_pass_id` | required | string    | The specific staff pass id |
+| name            | type     | data type | description                |
+| --------------- | -------- | --------- | -------------------------- |
+| `staff_pass_id` | required | string    | The specific staff pass id |
 
 ##### Responses
 
-> | http code | content-type               | response                    |
-> | --------- | -------------------------- | --------------------------- |
-> | `200`     | `application/json`         | Staff Object                |
-> | `400`     | `text/plain;charset=UTF-8` | `staff_pass_id is required` |
-> | `404`     | `text/plain;charset=UTF-8` | `Staff not found`           |
-> | `500`     | `text/plain;charset=UTF-8` | `Internal server error`     |
+| http code | content-type               | response                      |
+| --------- | -------------------------- | ----------------------------- |
+| `200`     | `application/json`         | `Staff Object`                |
+| `400`     | `text/plain;charset=UTF-8` | `"staff_pass_id is required"` |
+| `404`     | `text/plain;charset=UTF-8` | `"Staff not found"`           |
+| `500`     | `text/plain;charset=UTF-8` | `"Internal server error"`     |
 
 ##### Example cURL
 
-> ```bash
->  curl http://localhost:3000/api/staffs/{staff_pass_id}
-> ```
+```bash
+curl http://localhost:3000/api/staffs/{staff_pass_id}
+```
 
 </details>
 
@@ -71,25 +71,25 @@ A simple redemption form is available at `localhost:3000`
 
 ##### Parameters
 
-> | name            | type     | data type | description               |
-> | --------------- | -------- | --------- | ------------------------- |
-> | `staff_pass_id` | required | string    | Staff pass id of redeemer |
+| name            | type     | data type | description               |
+| --------------- | -------- | --------- | ------------------------- |
+| `staff_pass_id` | required | string    | Staff pass id of redeemer |
 
 ##### Responses
 
-> | http code | content-type               | response                                       |
-> | --------- | -------------------------- | ---------------------------------------------- |
-> | `201`     | `text/plain;charset=UTF-8` | `Redemption successful`                        |
-> | `400`     | `text/plain;charset=UTF-8` | `staff_pass_id is required`                    |
-> | `404`     | `text/plain;charset=UTF-8` | `Staff not found`                              |
-> | `409`     | `text/plain;charset=UTF-8` | `Redemption failed. Team has already redeemed` |
-> | `500`     | `text/plain;charset=UTF-8` | `Internal server error`                        |
+| http code | content-type               | response                                         |
+| --------- | -------------------------- | ------------------------------------------------ |
+| `201`     | `text/plain;charset=UTF-8` | `"Redemption successful"`                        |
+| `400`     | `text/plain;charset=UTF-8` | `"staff_pass_id is required"`                    |
+| `404`     | `text/plain;charset=UTF-8` | `"Staff not found"`                              |
+| `409`     | `text/plain;charset=UTF-8` | `"Redemption failed. Team has already redeemed"` |
+| `500`     | `text/plain;charset=UTF-8` | `"Internal server error"`                        |
 
 ##### Example cURL
 
-> ```bash
-> curl -H "Content-Type: application/json" -d '{"staff_pass_id": "{staff_pass_id}"}' http://localhost:3000/api/redeem
-> ```
+```bash
+curl -H "Content-Type: application/json" -d '{"staff_pass_id": "{staff_pass_id}"}' http://localhost:3000/api/redeem
+```
 
 </details>
 
@@ -115,7 +115,7 @@ Some assumptions I have made about the task:
 
 Just trying to cover all bases here:
 
-- The user know how to set up the system
+- The user knows how to set up the system
   - The system, as is, is only available through hosting a local development server
 - Only a single user interacts with the system at a time
 
@@ -123,7 +123,7 @@ Just trying to cover all bases here:
 
 > It's the Christmas season and you've been given the honorable task of distributing gifts to the teams in your department. Each team can send any representative to redeem their teams' gift.
 
-I approached this assignment from the perspective of building a simple system that prioritises:
+I approached this assignment from the perspective of building a simple system that prioritises the following characteristics:
 
 - plug and play
   - drop the `.csv` files in and start using
@@ -139,7 +139,9 @@ I approached this assignment from the perspective of building a simple system th
   - continuously deserializing and serializing CSV data is not the most performant
   - the static data is loaded into memory on initialization
 
-Admittedly, if the context demanded a system with greater scalability, a SQL database with an ORM would be the better solution to manage data. However, as the gift distribution appears to be a one-time event within my department (of just 5000 staff members), a local data store should be sufficient. It avoids the overhead of setting up and managing a database server. Nevertheless, the system was designed such that the core data mutations live inside the controllers: `redemptionController` and `staffController`, allowing for easy adaptability should a proper database be required.
+Admittedly, if the context demanded a system with greater scalability, a SQL database with an ORM would be the better solution to manage data. However, as the gift distribution appears to be a one-time event within my department (of just 5000 staff members), a local data store should be sufficient. It avoids the overhead of setting up and managing a database server.
+
+Nevertheless, the system was designed such that the core data mutations live inside the controllers: `redemptionController` and `staffController`, facilitating easy code changes should a proper database be required.
 
 ## Tech Stack
 
