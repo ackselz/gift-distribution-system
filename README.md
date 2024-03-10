@@ -5,7 +5,7 @@
 ### Prerequisites:
 
 - Node.js (version 20.11.0 or later)
-- pnpm (version X or later)
+- pnpm (version 8.15.4 or later)
 
 ### Installation
 
@@ -19,7 +19,7 @@
    pnpm install
    ```
 4. Add your mapping file to the `/src/data` directory
-   - The provided `staff-id-to-team-mapping-long.csv` and `staff-id-to-team-mapping.csv` are loaded by default
+   - The provided `staff-id-to-team-mapping-long.csv` (for `dev`) and `staff-id-to-team-mapping.csv` (for `test`) are loaded by default
    - Rename your desired mapping file to `staff-id-to-team-mapping-long.csv`
 
 ### Running the development server:
@@ -49,11 +49,12 @@ A simple redemption form is available at `localhost:3000`
 
 ##### Responses
 
-> | http code | content-type               | response                                 |
-> | --------- | -------------------------- | ---------------------------------------- |
-> | `201`     | `text/plain;charset=UTF-8` | `Configuration created successfully`     |
-> | `400`     | `application/json`         | `{"code":"400","message":"Bad Request"}` |
-> | `405`     | `text/html;charset=utf-8`  | None                                     |
+> | http code | content-type               | response                    |
+> | --------- | -------------------------- | --------------------------- |
+> | `200`     | `application/json`         | Staff Object                |
+> | `400`     | `text/plain;charset=UTF-8` | `staff_pass_id is required` |
+> | `404`     | `text/plain;charset=UTF-8` | `Staff not found`           |
+> | `500`     | `text/plain;charset=UTF-8` | `Internal server error`     |
 
 ##### Example cURL
 
@@ -76,11 +77,13 @@ A simple redemption form is available at `localhost:3000`
 
 ##### Responses
 
-> | http code | content-type               | response                                 |
-> | --------- | -------------------------- | ---------------------------------------- |
-> | `201`     | `text/plain;charset=UTF-8` | `Configuration created successfully`     |
-> | `400`     | `application/json`         | `{"code":"400","message":"Bad Request"}` |
-> | `405`     | `text/html;charset=utf-8`  | None                                     |
+> | http code | content-type               | response                                       |
+> | --------- | -------------------------- | ---------------------------------------------- |
+> | `201`     | `text/plain;charset=UTF-8` | `Redemption successful`                        |
+> | `400`     | `text/plain;charset=UTF-8` | `staff_pass_id is required`                    |
+> | `404`     | `text/plain;charset=UTF-8` | `Staff not found`                              |
+> | `409`     | `text/plain;charset=UTF-8` | `Redemption failed. Team has already redeemed` |
+> | `500`     | `text/plain;charset=UTF-8` | `Internal server error`                        |
 
 ##### Example cURL
 
@@ -92,6 +95,8 @@ A simple redemption form is available at `localhost:3000`
 
 ### Running unit tests:
 
+The tests uses the short version of the provided mapping file `staff-id-to-team-mapping.csv`.
+
 ```bash
 pnpm test
 ```
@@ -99,11 +104,18 @@ pnpm test
 ## Assumptions
 
 - Each staff pass is a unique ID (given)
+- Staff who do not appear on the mapping file are not eligible for redemption
 - No data anomalies in the mapping data (`staff-id-to-team-mapping-long.csv` and `staff-id-to-team-mapping-long.csv`)
   - The system does not provide explicit handling of data anomalies
-  - Errors will be thrown in the dev console
+  - Errors are thrown in the dev console to assist in debugging
+- There is no requirement to add staff to the mapping file
+  - if there is, the original mapping file can be edited directly
+
+Just trying to cover all bases here:
+
+- The user know how to set up the system
+  - The system, as is, is only available through hosting a local development server
 - Only a single user interacts with the system at a time
--
 
 ## Design Decisions
 
