@@ -14,16 +14,16 @@ apiRouter.get("/staffs/:staff_pass_id", async (req, res) => {
   try {
     const { staff_pass_id } = req.params;
     if (staff_pass_id === undefined) {
-      return res.status(400).json({ error: "staff_pass_id is required" });
+      return res.status(400).send("staff_pass_id is required");
     }
     const staff = getStaff(staff_pass_id);
     if (!staff) {
-      return res.status(404).json({ error: "Staff not found" });
+      return res.status(404).send("Staff not found");
     }
     return res.status(200).json(staff);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).send("Internal server error");
   }
 });
 
@@ -32,22 +32,22 @@ apiRouter.post("/redeem", async (req, res) => {
   try {
     const { staff_pass_id } = req.body;
     if (staff_pass_id === undefined) {
-      return res.status(400).json({ error: "staff_pass_id is required" });
+      return res.status(400).send("staff_pass_id is required");
     }
     const staff = getStaff(staff_pass_id);
     if (!staff) {
-      return res.status(404).json({ error: "Staff not found" });
+      return res.status(404).send("Staff not found");
     }
     const success = redeem(staff);
     if (!success) {
-      return res.status(409).json({
-        error: "Redemption failed. Team is not eligible for redemption",
-      });
+      return res
+        .status(409)
+        .send("Redemption failed. Team has already redeemed");
     }
-    return res.status(200).json({ message: "Redemption successful" });
+    return res.status(201).send("Redemption successful");
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).send("Internal server error");
   }
 });
 

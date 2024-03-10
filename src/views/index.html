@@ -11,7 +11,7 @@
   </head>
 
   <body class="h-dvh grid place-items-center">
-    <div class="container max-w-96">
+    <div class="container max-w-md">
       <div class="mb-5">
         <label for="staff_pass_id" class="block mb-2 font-medium text-gray-900"
           >Staff Pass ID</label
@@ -41,35 +41,31 @@
           Redeem
         </button>
       </form>
-      <div id="response"></div>
+      <div id="response">
+        <div
+          class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50"
+          role="alert"
+        >
+          Record a gift redemption by submitting a staff pass ID.
+        </div>
+      </div>
     </div>
     <script>
       document
         .getElementById("redeem-form")
         .addEventListener("htmx:afterRequest", (event) => {
           let response = event.detail.xhr;
-          // Parse the JSON response
-          let data;
-          try {
-            data = JSON.parse(response.response);
-          } catch (error) {
-            document.getElementById("response").innerHTML = `
-              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 role="alert">
-                <span class="font-medium">Error:</span> Invalid Server Response
-              </div>
-              `;
-            return;
-          }
-          if (response.status === 200) {
+          console.log(response);
+          if (response.status === 201) {
             document.getElementById("response").innerHTML = `
               <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-                <span class="font-medium">Success:</span> ${data.message}
+                <span class="font-medium">Success:</span> ${response.responseText}
               </div>
               `;
           } else {
             document.getElementById("response").innerHTML = `
               <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 role="alert">
-                <span class="font-medium">Error:</span> ${data.error}
+                <span class="font-medium">Error:</span> ${response.responseText}
               </div>
               `;
           }
