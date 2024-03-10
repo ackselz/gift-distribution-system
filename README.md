@@ -1,5 +1,16 @@
 # Gift Redemption System
 
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the development server](#running-the-development-server)
+  - [Views](#views)
+  - [API reference](#api-reference)
+- [Redemption data](#redemption-data)
+- [Running unit tests](#running-unit-tests)
+- [Assumptions](#assumptions)
+- [Design decisions](#design-decisions)
+- [Technologies used](#techologies-used)
+
 ## Prerequisites:
 
 - Node.js (version 21.3.0 or later)
