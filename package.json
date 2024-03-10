@@ -1,5 +1,5 @@
 {
-  "name": "gift-distribution-system",
+  "name": "gift-redemption-system",
   "version": "1.0.0",
   "engines": {
     "node": ">=21.3.0",
