@@ -1,7 +1,6 @@
 {
-  "name": "gds-swe-supplyally-govwallet",
+  "name": "gift-distribution-system",
   "version": "1.0.0",
-  "main": "dist/src/index.js",
   "engines": {
     "node": ">=21.3.0",
     "pnpm": ">=8.15.4"
