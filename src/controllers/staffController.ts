@@ -54,4 +54,3 @@ export function initializeStaffs(): void {
 
 // Initialize staff records
 export let staffRecords: Staff[] = deserializeStaffs();
-console.log(staffRecords);
