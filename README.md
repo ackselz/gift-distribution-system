@@ -1,13 +1,11 @@
 # Gift Redemption System
 
-## Get Started
-
-### Prerequisites:
+## Prerequisites:
 
 - Node.js (version 21.3.0 or later)
 - pnpm (version 8.15.4 or later)
 
-### Installation
+## Installation
 
 1. ```bash
    git clone https://github.com/ackselz/gift-redemption-system.git
@@ -20,11 +18,11 @@
    ```
 4. Add your mapping file to the `/src/data` directory
    - The provided `staff-id-to-team-mapping-long.csv` (for `dev`) and `staff-id-to-team-mapping.csv` (for `test`) are loaded by default
-   - Rename your desired mapping file to `staff-id-to-team-mapping-long.csv`
+   - Rename your desired mapping file to `staff-id-to-team-mapping-long.csv` (if you have another mapping file)
 
-### Running the development server:
+## Running the development server
 
-The development server runs at `localhost:3000`. Please restart the server you make changes to the data files.
+The development server runs at `localhost:3000`. Please restart this server if you make changes to the data files.
 
 ```bash
 pnpm dev
@@ -32,11 +30,11 @@ pnpm dev
 
 ### Views
 
-A simple redemption form is available at `localhost:3000`. An internet connection is required for this interface to function properly (loading styles and scripts via CDN).
+A simple redemption form is available at `localhost:3000`. An internet connection is required for this interface to function properly (loading TailwindCSS styles and HTMX scripts via CDN).
 
-### API Reference
+### API reference
 
-#### Staff Lookup
+#### Staff lookup
 
 <details>
  <summary><code>GET</code> <code><b>/{staff_pass_id}</b></code> <code>(gets staff details by a staff pass id)</code></summary>
@@ -93,9 +91,13 @@ curl -H "Content-Type: application/json" -d '{"staff_pass_id": "{staff_pass_id}"
 
 </details>
 
-### Running unit tests:
+## Redemption data
 
-The tests uses the short version of the provided mapping file `staff-id-to-team-mapping.csv`.
+Redemption data is stored in `src/data/redemptions.csv`. Additional redemptions are reflected live in the file.
+
+## Running unit tests
+
+The tests use the short version of the provided mapping file `staff-id-to-team-mapping.csv`.
 
 ```bash
 pnpm test
@@ -103,15 +105,14 @@ pnpm test
 
 ## Assumptions
 
-Some assumptions I have made about the task:
+Some assumptions I have made about the task include:
 
 - Each staff pass is a unique ID (given)
 - Staff who do not appear on the mapping file are not eligible for redemption
-- No data anomalies in the mapping data (`staff-id-to-team-mapping-long.csv` and `staff-id-to-team-mapping-long.csv`)
-  - The system does not provide explicit handling of data anomalies
-  - Errors are thrown in the dev console to assist in debugging
+- There are no data anomalies in the mapping data (`staff-id-to-team-mapping-long.csv` and `staff-id-to-team-mapping-long.csv`)
+  - The system does not provide explicit handling of data anomalies, but errors are thrown in the dev console to assist in debugging
 - There is no requirement to add staff to the mapping file
-  - if there is, the original mapping file can be edited directly
+  - If there is such a requirement, the original mapping file can be edited directly
 
 Just trying to cover all bases here:
 
@@ -119,7 +120,7 @@ Just trying to cover all bases here:
   - The system, as is, is only available through hosting a local development server
 - Only a single user interacts with the system at a time
 
-## Design Decisions
+## Design decisions
 
 > It's the Christmas season and you've been given the honorable task of distributing gifts to the teams in your department. Each team can send any representative to redeem their teams' gift.
 
@@ -136,14 +137,13 @@ I approached this assignment from the perspective of building a simple system th
     - an API client (Postman, etc.)
     - cURL from a command-line interface
 - fast enough
-  - continuously deserializing and serializing CSV data is not the most performant
-  - the static data is loaded into memory on initialization
+  - the static data is deserialized and loaded into memory on initialization
 
-Admittedly, if the context demanded a system with greater scalability, a SQL database with an ORM would be the better solution to manage data. However, as the gift distribution appears to be a one-time event within my department (of just 5000 staff members), a local data store should be sufficient. It avoids the overhead of setting up and managing a database server.
+Admittedly, if the context demanded a system with greater scalability, a SQL database with an ORM would be the better solution to manage data. However, as the gift distribution appears to be a one-time Christmas event within my department of a mere 5000 staff members, a local data store should be sufficient. It avoids the overhead of setting up and managing a database server.
 
-Nevertheless, the system was designed such that the core data mutations live inside the controllers: `redemptionController` and `staffController`, facilitating easy code changes should a proper database be required.
+Nevertheless, the system was designed such that the core data mutations live inside the controllers: `redemptionController` and `staffController`, facilitating easy integration should a proper database be required.
 
-## Tech Stack
+## Techologies used
 
 - Frontend
   - HTMX
