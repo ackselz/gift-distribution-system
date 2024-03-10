@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "main": "dist/src/index.js",
   "engines": {
-    "node": ">=21.3.0"
+    "node": ">=21.3.0",
+    "pnpm": ">=8.15.4"
   },
   "scripts": {
+    "dev": "NODE_ENV=dev tsx src/index.ts",
+    "test": "NODE_ENV=test glob \"src/**/*.test.ts\" \"test/**/*.test.ts\" -c \"tsx --test\"",
     "clean": "rimraf dist",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "dev": "NODE_ENV=dev tsx src/index.ts",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
     "lint": "eslint . --fix",
-    "lint-check": "eslint .",
-    "test": "NODE_ENV=test glob \"src/**/*.test.ts\" \"test/**/*.test.ts\" -c \"tsx --test\""
+    "lint-check": "eslint ."
   },
   "devDependencies": {
     "@tsconfig/node20": "20.1.2",
